@@ -1,0 +1,19 @@
+
+.cont
+{
+    margin-top: 6%;
+}
+
+.content
+{
+    max-width: 750px;
+    margin: auto;
+    background-color: aliceblue;
+    padding: 7% 5%;
+}
+
+
+.error
+{
+    color: red;
+}

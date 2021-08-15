@@ -1,0 +1,36 @@
+<div class="container  cont">
+    <form class="content" [formGroup]="loginForm" (ngSubmit)="submitData()">
+        <h3> Login Form</h3>
+       
+        <div class="mt-4 mb-2 col-lg-12 col-12">
+            <input type="text" formControlName="emailId" class="form-control" placeholder="Emaill">
+            
+            <div *ngIf="emailid.invalid && (emailid.touched || emailid.dirty)">
+                <span class="error" *ngIf="emailid.errors?.required">*Email Required</span>   
+                <span class="error" *ngIf="emailid.errors?.email">*Entre Valid Email</span>   
+            </div>
+        </div>
+
+        <div class="mt-4 mb-2 col-lg-12 col-12">
+            <input type="password" formControlName="Password" class="form-control" placeholder="password">
+            
+            <div *ngIf="password.invalid && (password.touched || password.dirty)">
+                <span class="error" *ngIf="password.errors?.required">*Password Required</span>   
+            </div>
+
+        </div>
+
+        <div class="mt-4 mb-4 d-grid gap-2">
+            <button type="submit" class="btn btn-dark" [disabled]="loginForm.invalid">Login</button>
+        </div>
+
+        <div>
+            <p>You don't have an acount ?</p>
+        </div>
+
+        <div class=" d-grid gap-2">
+        <button type="button" class="btn btn-outline-dark">Register</button>
+        </div>
+
+    </form>
+</div>
