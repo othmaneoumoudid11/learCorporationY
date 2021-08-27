@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { ApiService } from 'src/app/shared/api.service';
+import { User } from 'src/app/shared/models/User.model';
 
 @Component({
   selector: 'app-register',
@@ -8,9 +10,10 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 })
 export class RegisterComponent implements OnInit {
 
-  constructor() { }
+  constructor(private api : ApiService) { }
 
   registerForm:any;
+  UserObj : User = new User();
 
   ngOnInit(): void {
     this.registerForm = new FormGroup({
@@ -25,6 +28,22 @@ export class RegisterComponent implements OnInit {
   submitData()
   {
    console.log(this.registerForm.value);
+
+   this.UserObj.First_name = this.registerForm.value.firstName;
+   this.UserObj.Last_name = this.registerForm.value.lastName;
+   this.UserObj.Num_telephone = this.registerForm.value.mobileNumber;
+   this.UserObj.email = this.registerForm.value.emailId;
+   this.UserObj.motpasse = this.registerForm.value.Password;
+
+   this.api.addUser(this.UserObj)
+    .subscribe(res=>{
+      console.log(res);
+    },
+    err=>{
+      alert("something Went Wrong")
+    })
+    
+
 
 
    this.registerForm.reset();
