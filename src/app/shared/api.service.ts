@@ -28,5 +28,12 @@ export class ApiService {
     return this.http.delete<void>('http://localhost:8080/comptes/supprimer/'+userId);
   }
 
+  public ChercherCompte(email: string,mdp: string):Observable<User>{
+    return this.http.get<User>('http://localhost:8080/comptes/chercher?email='+email+'&MDP='+mdp);
+  }
+
+  public VerifieCompte(email: string,mdp: string):Observable<Number>{
+    return this.http.get<Number>('http://localhost:8080/comptes/verifier?email='+email+'&MDP='+mdp);
+  }
 
 }

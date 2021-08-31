@@ -11,8 +11,11 @@ import { User } from 'src/app/shared/models/User.model';
 export class RestPasswordComponent implements OnInit {
 
   UserObj : User = new User();
+  api : ApiService | undefined;
 
-  constructor(private Apiservice: ApiService) { }
+
+  constructor() {
+   }
 
   registerForm:any;
 
@@ -31,13 +34,13 @@ export class RestPasswordComponent implements OnInit {
    console.log(this.registerForm.value);
 
    
-   this.UserObj.First_name = this.registerForm.value.firstName;
-   this.UserObj.Last_name = this.registerForm.value.lastName;
-   this.UserObj.Num_telephone = this.registerForm.value.mobileNumber;
+   this.UserObj.first_name = this.registerForm.value.firstName;
+   this.UserObj.last_name = this.registerForm.value.lastName;
+   this.UserObj.num_telephone = this.registerForm.value.mobileNumber;
    this.UserObj.email = this.registerForm.value.emailId;
    this.UserObj.motpasse = this.registerForm.value.Password;
 
-   this.Apiservice.addUser(this.UserObj)
+   this.api?.addUser(this.UserObj)
     .subscribe(res=>{
       console.log(res);
     },
@@ -45,7 +48,7 @@ export class RestPasswordComponent implements OnInit {
       alert("something Went Wrong")
     })
   
-
+User
    this.registerForm.reset();
 
   }

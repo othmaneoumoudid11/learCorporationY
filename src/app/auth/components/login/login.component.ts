@@ -1,5 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { ApiService } from 'src/app/shared/api.service';
+import { User } from 'src/app/shared/models/User.model';
+
 
 @Component({
   selector: 'app-login',
@@ -8,7 +11,7 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 })
 export class LoginComponent implements OnInit {
 
-  constructor() { }
+  constructor(private api:ApiService) { }
 
   loginForm:any;
 
@@ -21,7 +24,27 @@ export class LoginComponent implements OnInit {
 
   submitData()
   {
+
+    
    console.log(this.loginForm.value);
+
+   
+   this.api.VerifieCompte(this.loginForm.value.emailId, this.loginForm.value.Password)
+    .subscribe(res=>{
+      console.log(res);
+
+      if(res==1){
+        sessionStorage.setItem(AUTH_USER_TYPE,"CC");
+      }else if(res==3){
+        sessionStorage.setItem(AUTH_USER_TYPE,"CA");
+      }else if(res==2){
+        sessionStorage.setItem(AUTH_USER_TYPE,"CM");
+      }
+      
+    },
+    err=>{
+      alert("something Went Wrong")
+    })
 
    this.loginForm.reset();
   }
