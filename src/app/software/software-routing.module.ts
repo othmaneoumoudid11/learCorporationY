@@ -3,7 +3,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { SofTableComponent } from './components/sof-table/sof-table.component';
 
 const routes: Routes = [
-  { path: 'softwares', component: SofTableComponent},
+  { path: 'softwares', component: SofTableComponent}
 ];
 
 @NgModule({

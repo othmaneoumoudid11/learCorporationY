@@ -1,7 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 import { ApiService } from 'src/app/shared/api.service';
-import { User } from 'src/app/shared/models/User.model';
+import { AUTH_TEKEN_KEY, AUTH_USER_FIRST_NAME, AUTH_USER_LAST_NAME, AUTH_USER_TYPE } from 'src/app/state/CurrentUser';
+
 
 @Component({
   selector: 'app-rest-password',
@@ -10,59 +12,66 @@ import { User } from 'src/app/shared/models/User.model';
 })
 export class RestPasswordComponent implements OnInit {
 
-  UserObj : User = new User();
-  api : ApiService | undefined;
+  constructor(private api:ApiService, private router:Router) { }
 
-
-  constructor() {
-   }
-
-  registerForm:any;
+  loginForm:any;
 
   ngOnInit(): void {
-    this.registerForm = new FormGroup({
-      "firstName":new FormControl(null,[Validators.required,Validators.pattern('[a-zA-Z]*')]),
-      "lastName":new FormControl(null,[Validators.required,Validators.pattern('[a-zA-Z]*')]),
+
+    this.loginForm = new FormGroup({
       "emailId":new FormControl(null,[Validators.required,Validators.email]),
-      "Password":new FormControl(null,[Validators.required]),
-      "mobileNumber":new FormControl(null,[Validators.required,Validators.pattern('[0-9]*')])
+      "Password":new FormControl(null,[Validators.required])
     });
   }
 
   submitData()
-  {
-   console.log(this.registerForm.value);
-
-   
-   this.UserObj.first_name = this.registerForm.value.firstName;
-   this.UserObj.last_name = this.registerForm.value.lastName;
-   this.UserObj.num_telephone = this.registerForm.value.mobileNumber;
-   this.UserObj.email = this.registerForm.value.emailId;
-   this.UserObj.motpasse = this.registerForm.value.Password;
-
-   this.api?.addUser(this.UserObj)
+  {    
+   console.log(this.loginForm.value);
+   this.api.VerifieCompte(this.loginForm.value.emailId, this.loginForm.value.Password)
     .subscribe(res=>{
       console.log(res);
+
+      if(res==-1){
+        this.router.navigate(['/login'])
+        console.log('X-1X');
+      }else if(res==1){
+        sessionStorage.setItem(AUTH_USER_TYPE,"CU");
+        console.log('X1X');
+        this.router.navigate(['/softwares'])
+      }else if(res==2){
+        sessionStorage.setItem(AUTH_USER_TYPE,"CM");
+        console.log('X2X');
+        this.router.navigate(['/softwares'])
+      }
+
+      
     },
     err=>{
       alert("something Went Wrong")
     })
-  
-User
-   this.registerForm.reset();
 
+    console.log(this.loginForm.value.emailId)
+    this.onChercherCompte(this.loginForm.value.emailId,this.loginForm.value.Password);
+    
+    this.loginForm.reset();
   }
 
-  get firstname() { return this.registerForm.get('firstName'); }
+  public onChercherCompte(email: string, password: string){
+    this.api.ChercherCompte(email,password)
+    .subscribe(data=>{
+        console.log('X2X');
+        console.log(data);
+        sessionStorage.setItem(AUTH_TEKEN_KEY,data.id_compte.toString());
+        sessionStorage.setItem(AUTH_USER_FIRST_NAME,data.first_name);
+        sessionStorage.setItem(AUTH_USER_LAST_NAME,data.last_name);
+        console.log(data.last_name);
+    });
+  }
 
-  get lastname() { return this.registerForm.get('lastName'); }
 
-  get emailid() { return this.registerForm.get('emailId'); }
+  get emailid() { return this.loginForm.get('emailId'); }
 
-  get mobilenumber() { return this.registerForm.get('mobileNumber'); }
-
-  get password() { return this.registerForm.get('Password'); }
-
+  get password() { return this.loginForm.get('Password'); }
 
 
 

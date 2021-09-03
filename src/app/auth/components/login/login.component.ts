@@ -33,15 +33,17 @@ export class LoginComponent implements OnInit {
       console.log(res);
 
       if(res==-1){
-        this.router.navigate(['/login'])
+        this.router.navigate(['/rest'])
         console.log('X-1X');
       }else if(res==1){
         sessionStorage.setItem(AUTH_USER_TYPE,"CU");
         console.log('X1X');
+        this.router.navigate(['/softwares'])
 
       }else if(res==2){
         sessionStorage.setItem(AUTH_USER_TYPE,"CM");
         console.log('X2X');
+        this.router.navigate(['/softwares'])
       }
 
       

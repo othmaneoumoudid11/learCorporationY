@@ -1,0 +1,102 @@
+<nav class="navbar navbar-light bg-primary">
+    <div class="container-fluid">
+        <h1 style="color: aliceblue"> Softwares </h1>
+        <div class="d-flex">
+            <button (click)="clickAddLicence()" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#exampleModal">Add Licence</button>
+        </div>
+    </div>
+</nav>
+
+
+<div class="container  content cont">
+ 
+    <form>
+        <div class="mb-3 form-group">
+          <label for="exampleInputEmail1">Search Term</label>
+          <input type="text" [(ngModel)]="term" name="term" class="form-control">
+        </div>
+    </form>
+    <table class="table">
+        <thead>
+          <tr>
+            <th scope="col">#</th>
+            <th scope="col">First</th>
+            <th scope="col">Last</th>
+            <th scope="col">Handle</th>
+            <th scope="col">Last</th>
+            <th scope="col">Handle</th>
+            <th scope="col">Handle</th>
+            <th>Action</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let row of licenceData | paginate: { itemsPerPage: 6, currentPage: p} | filter : term">
+            <td>{{row.lic_ref}}</td>
+            <td>{{row.lic_serial}}</td>
+            <td>{{row.lic_type}}</td>
+            <td>{{row.lic_cost}}</td>
+            <td>{{row.currency}}</td>
+            <td>{{row.lic_BO_alloc}}</td>
+            <td>{{row.lic_vend_cont_ref}}</td>
+            <td>
+                <button (click)="onEdit(row)" style="color: aliceblue" data-bs-toggle="modal" data-bs-target="#exampleModal" class="btn btn-info">Edit</button>
+                <button (click)="deleteLicence(row)" class="btn btn-danger mx-3">Delete</button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+      <div class="cent"> 
+          <pagination-controls (pageChange)="p = $event"></pagination-controls>
+      </div>
+</div>
+
+  
+  <!-- Modal -->
+  <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Licence Model</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+            <form [formGroup]="formValue">
+                <div class="mb-3">
+                  <label for="exampleInputEmail1" class="form-label">Lic_ref</label>
+                  <input type="text" formControlName="lic_ref" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+                </div>
+                <div class="mb-3">
+                  <label for="exampleInputPassword1" class="form-label">Lic_serial</label>
+                  <input type="text" formControlName="lic_serial" class="form-control" id="exampleInputPassword1">
+                </div>
+                <div class="mb-3">
+                    <label for="exampleInputEmail1" class="form-label">Lic_type</label>
+                    <input type="text" formControlName="lic_type" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+                  </div>
+                  <div class="mb-3">
+                    <label for="exampleInputPassword1" class="form-label">Lic_cost</label>
+                    <input type="text" formControlName="lic_cost" class="form-control" id="exampleInputPassword1">
+                  </div>
+                  <div class="mb-3">
+                    <label for="exampleInputEmail1" class="form-label">Currency</label>
+                    <input type="text" formControlName="currency" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+                  </div>
+                  <div class="mb-3">
+                    <label for="exampleInputPassword1" class="form-label">Lic_BO_alloc</label>
+                    <input type="text" formControlName="lic_BO_alloc" class="form-control" id="exampleInputPassword1">
+                  </div>
+                  <div class="mb-3">
+                    <label for="exampleInputPassword1" class="form-label">Lic_vend_cont_ref</label>
+                    <input type="text" formControlName="lic_vend_cont_ref" class="form-control" id="exampleInputPassword1">
+                  </div>
+              </form>
+        </div>
+        <div class="modal-footer">
+          <button type="button" id="cancel" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+          <button type="button" *ngIf="showAdd" (click)="postLicence()" class="btn btn-primary">Save</button>
+          <button type="button" *ngIf="showUpdate" (click)="updateLicence()" class="btn btn-primary">Update</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
