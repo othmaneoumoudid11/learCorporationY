@@ -2,6 +2,7 @@ import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
 import {FormBuilder, FormGroup} from '@angular/forms'
 import { ApiService } from 'src/app/shared/api.service';
 import { Licence } from 'src/app/shared/models/Licence.model';
+import { AUTH_TEKEN_KEY, AUTH_USER_LAST_NAME, AUTH_USER_TYPE } from 'src/app/state/CurrentUser';
 
 declare const $: any;
 
@@ -20,6 +21,11 @@ export class LicTableComponent implements OnInit, AfterViewInit{
   showUpdate ! : boolean;
   p: number = 1;
   term: any;
+  public typeCompte !: string;
+  public FirstName ! : string;
+  public LastName ! : string;
+  public KeyUser : number = 0;
+
   constructor(private formbuilder: FormBuilder,private api : ApiService) {}
 
   title = 'Datatable';
@@ -31,6 +37,12 @@ export class LicTableComponent implements OnInit, AfterViewInit{
   }
 
   ngOnInit(): void {
+
+    this.typeCompte = sessionStorage.getItem(AUTH_USER_TYPE)!;
+    this.LastName = sessionStorage.getItem(AUTH_USER_LAST_NAME)!;
+    this.FirstName = sessionStorage.getItem(AUTH_USER_LAST_NAME)!;
+    this.KeyUser= +sessionStorage.getItem(AUTH_TEKEN_KEY)!;
+
     this.formValue = this.formbuilder.group({
       lic_ref : [''], 
       lic_serial : [''],

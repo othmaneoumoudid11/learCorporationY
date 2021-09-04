@@ -21,9 +21,10 @@ export class SofTableComponent implements OnInit, AfterViewInit{
   showUpdate ! : boolean;
   p: number = 1;
   term: any;
-   typeCompte : string = '';
-   UserName : string = '';
-   KeyUser : number = 0;
+   public typeCompte !: string;
+   public LastName ! : string;
+   public FirstName ! : string;
+   public KeyUser : number = 0;
 
 
   constructor(private formbuilder: FormBuilder,private api : ApiService) {}
@@ -38,9 +39,10 @@ export class SofTableComponent implements OnInit, AfterViewInit{
 
   ngOnInit(): void {
 
-    this.typeCompte = sessionStorage.getItem(AUTH_USER_TYPE);
-    this.UserName = sessionStorage.getItem(AUTH_USER_LAST_NAME);
-    this.KeyUser= sessionStorage.getItem(AUTH_TEKEN_KEY);
+    this.typeCompte = sessionStorage.getItem(AUTH_USER_TYPE)!;
+    this.LastName = sessionStorage.getItem(AUTH_USER_LAST_NAME)!;
+    this.FirstName = sessionStorage.getItem(AUTH_USER_LAST_NAME)!;
+    this.KeyUser= +sessionStorage.getItem(AUTH_TEKEN_KEY)!;
 
     this.formValue = this.formbuilder.group({
       soft_ref : [''], 
