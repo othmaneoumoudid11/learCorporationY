@@ -1,8 +1,9 @@
 import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
 import {FormBuilder, FormGroup} from '@angular/forms'
+import { Router } from '@angular/router';
 import { ApiService } from 'src/app/shared/api.service';
 import { Licence } from 'src/app/shared/models/Licence.model';
-import { AUTH_TEKEN_KEY, AUTH_USER_LAST_NAME, AUTH_USER_TYPE } from 'src/app/state/CurrentUser';
+import { AUTH_TEKEN_KEY, AUTH_USER_FIRST_NAME, AUTH_USER_LAST_NAME, AUTH_USER_TYPE } from 'src/app/state/CurrentUser';
 
 declare const $: any;
 
@@ -26,7 +27,7 @@ export class LicTableComponent implements OnInit, AfterViewInit{
   public LastName ! : string;
   public KeyUser : number = 0;
 
-  constructor(private formbuilder: FormBuilder,private api : ApiService) {}
+  constructor(private formbuilder: FormBuilder,private api : ApiService, private router: Router) {}
 
   title = 'Datatable';
 
@@ -134,6 +135,14 @@ export class LicTableComponent implements OnInit, AfterViewInit{
       this.formValue.reset();
       this.getAllLicences();
     })
+  }
+
+  onDeconnexion(){
+    sessionStorage.removeItem(AUTH_TEKEN_KEY);
+    sessionStorage.removeItem(AUTH_USER_TYPE);
+    sessionStorage.removeItem(AUTH_USER_LAST_NAME);
+    sessionStorage.removeItem(AUTH_USER_FIRST_NAME);
+    this.router.navigateByUrl("/login");
   }
 
 }

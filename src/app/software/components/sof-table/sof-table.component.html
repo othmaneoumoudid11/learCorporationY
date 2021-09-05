@@ -1,11 +1,49 @@
-<nav class="navbar navbar-light bg-primary mb-5">
+<nav class="navbar navbar-expand-lg navbar-light bg-light mb-5">
     <div class="container-fluid">
-        <h1 style="color: aliceblue"> Softwares </h1>
-        <div class="d-flex" *ngIf="typeCompte=='CM'">
-            <button (click)="clickAddSoftware()" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#exampleModal">Add Software</button>
+      <a class="navbar-brand">Softwares</a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+          <li class="nav-item">
+            <a class="nav-link active" aria-current="page">Lear</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link">Corporation</a>
+          </li>
+  
+  
+  
+        </ul>
+
+        <div class="marR">
+            <button type="button" class="btn btn-secondary" routerLink="/softwares">Softwares</button>
         </div>
+  
+        <div class="marR">
+            <button type="button" class="btn btn-outline-secondary" routerLink="/licences">Licences</button>
+        </div>
+  
+        <div class="marR" *ngIf="typeCompte=='CM'">
+          <button (click)="clickAddSoftware()" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#exampleModal">Add Software</button>
+        </div>
+        <div class="dropdown d-flex">
+          
+          <a class="btn btn-secondary dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false">
+            Dropdown link
+          </a>
+        
+          <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+            <li *ngIf="typeCompte=='CM'"><a class="dropdown-item" >Licences Requests</a></li>
+            <li *ngIf="typeCompte=='CM'"><a class="dropdown-item" >Softwares Requests</a></li>
+            <li><a class="dropdown-item" (click)="onDeconnexion()">Log-Out</a></li>
+          </ul>
+        </div>
+      </div>
     </div>
-</nav>
+  </nav>
+  
 
 
 <div class="container  content cont">
@@ -36,9 +74,12 @@
             <td>{{row.soft_familly}}</td>
             <td>{{row.soft_version}}</td>
             <td>{{row.soft_Desc}}</td>
-            <td>
+            <td *ngIf="typeCompte=='CM'">
                 <button (click)="onEdit(row)" style="color: aliceblue" data-bs-toggle="modal" data-bs-target="#exampleModal" class="btn btn-info">Edit</button>
                 <button (click)="deleteSoftware(row)" class="btn btn-danger mx-3">Delete</button>
+            </td>
+            <td *ngIf="typeCompte=='CU'">
+                <button type="button" class="btn btn-outline-dark">Request</button>
             </td>
           </tr>
         </tbody>

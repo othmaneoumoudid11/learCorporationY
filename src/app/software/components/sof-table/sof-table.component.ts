@@ -1,8 +1,9 @@
 import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
 import {FormBuilder, FormGroup} from '@angular/forms'
+import { Router } from '@angular/router';
 import { ApiService } from 'src/app/shared/api.service';
 import { Software } from 'src/app/shared/models/Software.model';
-import { AUTH_TEKEN_KEY, AUTH_USER_LAST_NAME, AUTH_USER_TYPE } from 'src/app/state/CurrentUser';
+import { AUTH_TEKEN_KEY, AUTH_USER_FIRST_NAME, AUTH_USER_LAST_NAME, AUTH_USER_TYPE } from 'src/app/state/CurrentUser';
 
 declare const $: any;
 
@@ -22,12 +23,12 @@ export class SofTableComponent implements OnInit, AfterViewInit{
   p: number = 1;
   term: any;
    public typeCompte !: string;
-   public LastName ! : string;
-   public FirstName ! : string;
+   public lastName ! : string;
+   public firstName ! : string;
    public KeyUser : number = 0;
 
 
-  constructor(private formbuilder: FormBuilder,private api : ApiService) {}
+  constructor(private formbuilder: FormBuilder,private api : ApiService, private router: Router) {}
 
   title = 'Datatable';
 
@@ -40,8 +41,8 @@ export class SofTableComponent implements OnInit, AfterViewInit{
   ngOnInit(): void {
 
     this.typeCompte = sessionStorage.getItem(AUTH_USER_TYPE)!;
-    this.LastName = sessionStorage.getItem(AUTH_USER_LAST_NAME)!;
-    this.FirstName = sessionStorage.getItem(AUTH_USER_LAST_NAME)!;
+    this.lastName = sessionStorage.getItem(AUTH_USER_LAST_NAME)!;
+    this.firstName = sessionStorage.getItem(AUTH_USER_FIRST_NAME)!;
     this.KeyUser= +sessionStorage.getItem(AUTH_TEKEN_KEY)!;
 
     this.formValue = this.formbuilder.group({
@@ -130,5 +131,14 @@ export class SofTableComponent implements OnInit, AfterViewInit{
       this.getAllSoftwares();
     })
   }
+
+  onDeconnexion(){
+    sessionStorage.removeItem(AUTH_TEKEN_KEY);
+    sessionStorage.removeItem(AUTH_USER_TYPE);
+    sessionStorage.removeItem(AUTH_USER_LAST_NAME);
+    sessionStorage.removeItem(AUTH_USER_FIRST_NAME);
+    this.router.navigateByUrl("/login");
+  }
+
 
 }
