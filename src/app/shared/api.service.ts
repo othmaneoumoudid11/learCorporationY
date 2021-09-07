@@ -74,5 +74,12 @@ export class ApiService {
     return this.http.delete<void>('http://localhost:8080/Licences/supprimer/'+licenceId);
   }
 
+  public DemApSof(id_software: number,id_user: number):Observable<void>{
+    return this.http.get<void>('http://localhost:8080/AprSoft/Ajouter?id_software='+id_software+'&id_user='+id_user);
+  }
+  
+  public listeDemAprv():Observable<void>{
+    return this.http.get<void>('http://localhost:8080/AprSoft/listeDemAprv');
+  }
 
 }
