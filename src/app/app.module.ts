@@ -6,6 +6,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { AuthModule } from './auth/auth.module';
 import { LicenceModule } from './licence/licence.module';
+import { ListDemSofModule } from './list-dem-sof/list-dem-sof.module';
 import { SoftwareModule } from './software/software.module';
 
 @NgModule({
@@ -19,7 +20,8 @@ import { SoftwareModule } from './software/software.module';
     FormsModule,
     ReactiveFormsModule,
     SoftwareModule,
-    LicenceModule
+    LicenceModule,
+    ListDemSofModule
   ],
   providers: [],
   bootstrap: [AppComponent]

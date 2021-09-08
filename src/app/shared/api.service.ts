@@ -4,6 +4,7 @@ import { Observable } from 'rxjs';
 import { User } from './models/User.model';
 import { Software } from './models/Software.model';
 import { Licence } from './models/Licence.model';
+import { DemAprvSOf } from './models/DemAprvSof.model';
 
 @Injectable({
   providedIn: 'root'
@@ -78,8 +79,14 @@ export class ApiService {
     return this.http.get<void>('http://localhost:8080/AprSoft/Ajouter?id_software='+id_software+'&id_user='+id_user);
   }
   
-  public listeDemAprv():Observable<void>{
-    return this.http.get<void>('http://localhost:8080/AprSoft/listeDemAprv');
+  public listeDemAprv():Observable<DemAprvSOf[]>{
+    return this.http.get<DemAprvSOf[]>('http://localhost:8080/AprSoft/listeDemAprv');
+  }
+  public AprDem(DemandeId: number):Observable<void>{
+    return this.http.get<void>('http://localhost:8080/AprSoft/accepter/'+DemandeId);
+  }
+  public RefDem(DemandeId: number):Observable<void>{
+    return this.http.get<void>('http://localhost:8080/AprSoft/refuser/'+DemandeId);
   }
 
 }

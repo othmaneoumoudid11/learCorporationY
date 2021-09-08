@@ -102,6 +102,17 @@ export class SofTableComponent implements OnInit, AfterViewInit{
 
   }
 
+  DemSoftApr(row: any){
+    this.api.DemApSof(row.id_software,this.KeyUser)
+    .subscribe(res => {
+      alert("Demmad Sent succefully");
+      this.getAllSoftwares();
+    }, err=> {
+      alert("Something went wrong");
+    })
+
+  }
+
   onEdit(row: any){
     this.showAdd = false;
     this.showUpdate = true;
