@@ -32,10 +32,10 @@
           </a>
         
           <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-            <li *ngIf="typeCompte=='CM'"><a class="dropdown-item" routerLink="/LDSAA">Licences Requests</a></li>
-            <li *ngIf="typeCompte=='CM'"><a class="dropdown-item" routerLink="/LDLAA">Softwares Requests</a></li>
-            <li *ngIf="typeCompte=='CU'"><a class="dropdown-item" routerLink="/LDSAU">Licences Requests</a></li>
-            <li *ngIf="typeCompte=='CU'"><a class="dropdown-item" routerLink="/LDLAU">Softwares Requests</a></li>
+            <li *ngIf="typeCompte=='CM'"><a class="dropdown-item" >Licences Requests</a></li>
+            <li *ngIf="typeCompte=='CM'"><a class="dropdown-item" >Softwares Requests</a></li>
+            <li *ngIf="typeCompte=='CU'"><a class="dropdown-item" >Licences Requests</a></li>
+            <li *ngIf="typeCompte=='CU'"><a class="dropdown-item" >Softwares Requests</a></li>
             <li><a class="dropdown-item" (click)="onDeconnexion()">Log-Out</a></li>
           </ul>
         </div>
@@ -62,21 +62,17 @@
             <th scope="col">acceptee</th>
             <th scope="col">First_Name</th>
             <th scope="col">Last_Name</th>
-            <th *ngIf="typeCompte=='CM'">Action</th>
           </tr>
         </thead>
         <tbody>
-          <tr *ngFor="let row of DemAprSofData | paginate: { itemsPerPage: 6, currentPage: p} | filter : term">
-            <td>{{row.software.soft_ref}}</td>
-            <td>{{row.date_Request}}</td>
-            <td>{{row.date_Approv}}</td>
-            <td>{{row.acceptee}}</td>
-            <td>{{row.user.first_name}}</td>
-            <td>{{row.user.last_name}}</td>
-            <td *ngIf="typeCompte=='CM'">
-                <button (click)="onAccept(row)" style="color: rgb(212, 218, 211)"  class="btn btn-info">Accept</button>
-                <button (click)="onRefuse(row)" style="color :rgb(207, 28, 22)" class="btn btn-danger mx-3">Refuse</button>
-            </td>
+        
+          <tr  *ngFor="let row of DemAprSofData | paginate: { itemsPerPage: 6, currentPage: p} | filter : term" >
+            <td *ngIf="row.user.id_compte==KeyUser">{{row.software.soft_ref}}</td>
+            <td *ngIf="row.user.id_compte==KeyUser">{{row.date_Request}}</td>
+            <td *ngIf="row.user.id_compte==KeyUser">{{row.date_Approv}}</td>
+            <td *ngIf="row.user.id_compte==KeyUser">{{row.acceptee}}</td>
+            <td *ngIf="row.user.id_compte==KeyUser">{{row.user.first_name}}</td>
+            <td *ngIf="row.user.id_compte==KeyUser">{{row.user.last_name}}</td>
           </tr>
         </tbody>
       </table>

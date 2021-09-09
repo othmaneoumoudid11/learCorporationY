@@ -33,8 +33,10 @@
         </a>
       
         <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-          <li *ngIf="typeCompte=='CM'"><a class="dropdown-item">Licences Requests</a></li>
-          <li *ngIf="typeCompte=='CM'"><a class="dropdown-item">Softwares Requests</a></li>
+          <li *ngIf="typeCompte=='CM'"><a class="dropdown-item" routerLink="/LDSAA">Licences Requests</a></li>
+          <li *ngIf="typeCompte=='CM'"><a class="dropdown-item" routerLink="/LDLAA">Softwares Requests</a></li>
+          <li *ngIf="typeCompte=='CU'"><a class="dropdown-item" routerLink="/LDSAU">Licences Requests</a></li>
+          <li *ngIf="typeCompte=='CU'"><a class="dropdown-item" routerLink="/LDLAU">Softwares Requests</a></li>
           <li><a class="dropdown-item" (click)="onDeconnexion()">Log-Out</a></li>
         </ul>
       </div>

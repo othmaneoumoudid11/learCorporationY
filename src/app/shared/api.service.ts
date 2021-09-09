@@ -89,4 +89,18 @@ export class ApiService {
     return this.http.get<void>('http://localhost:8080/AprSoft/refuser/'+DemandeId);
   }
 
+  public DemApLic(id_software: number,id_user: number):Observable<void>{
+    return this.http.get<void>('http://localhost:8080/AprLic/Ajouter?id_software='+id_software+'&id_user='+id_user);
+  }
+  
+  public listeDemAprvLic():Observable<DemAprvSOf[]>{
+    return this.http.get<DemAprvSOf[]>('http://localhost:8080/AprLic/listeDemAprv');
+  }
+  public AprDemLic(DemandeId: number):Observable<void>{
+    return this.http.get<void>('http://localhost:8080/AprLic/accepter/'+DemandeId);
+  }
+  public RefDemLic(DemandeId: number):Observable<void>{
+    return this.http.get<void>('http://localhost:8080/AprLic/refuser/'+DemandeId);
+  }
+
 }

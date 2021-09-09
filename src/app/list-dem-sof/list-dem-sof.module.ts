@@ -8,11 +8,13 @@ import { NgxPaginationModule } from 'ngx-pagination';
 import { BrowserModule } from '@angular/platform-browser';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
+import { ListDemSofUserComponent } from './components/list-dem-sof-user/list-dem-sof-user.component';
 
 
 @NgModule({
   declarations: [
-    ListDemSofAdmComponent
+    ListDemSofAdmComponent,
+    ListDemSofUserComponent
   ],
   imports: [
     CommonModule,
