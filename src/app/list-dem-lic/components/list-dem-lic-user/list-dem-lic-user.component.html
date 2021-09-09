@@ -1,6 +1,6 @@
 <nav class="navbar navbar-expand-lg navbar-light bg-light mb-5">
     <div class="container-fluid">
-      <a class="navbar-brand">List Demmande approve Softwares</a>
+      <a class="navbar-brand">List Demmande approve Licences</a>
       <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
@@ -12,9 +12,6 @@
           <li class="nav-item">
             <a class="nav-link">{{lastName}}</a>
           </li>
-  
-  
-  
         </ul>
 
         <div class="marR">
@@ -56,16 +53,15 @@
     <table class="table">
         <thead>
           <tr>
-            <th scope="col">soft_ref</th>
+            <th scope="col">Lic_ref</th>
             <th scope="col">date_Request</th>
             <th scope="col">date_Approv</th>
             <th scope="col">acceptee</th>
           </tr>
         </thead>
         <tbody>
-        
-          <tr  *ngFor="let row of DemAprSofData | paginate: { itemsPerPage: 6, currentPage: p} | filter : term" >
-            <td *ngIf="row.user.id_compte==KeyUser">{{row.software.soft_ref}}</td>
+          <tr *ngFor="let row of DemAprLicData | paginate: { itemsPerPage: 6, currentPage: p} | filter : term">
+            <td *ngIf="row.user.id_compte==KeyUser">{{row.licence.lic_ref}}</td>
             <td *ngIf="row.user.id_compte==KeyUser">{{row.date_Request}}</td>
             <td *ngIf="row.user.id_compte==KeyUser">{{row.date_Approv}}</td>
             <td *ngIf="row.user.id_compte==KeyUser">{{row.acceptee}}</td>

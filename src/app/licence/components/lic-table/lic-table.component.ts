@@ -137,6 +137,17 @@ export class LicTableComponent implements OnInit, AfterViewInit{
     })
   }
 
+  DemLictApr(row: any){
+    this.api.DemApLic(row.id_licence,this.KeyUser)
+    .subscribe(res => {
+      alert("Demmad Sent succefully");
+      this.getAllLicences();
+    }, err=> {
+      alert("Something went wrong");
+    })
+
+  }
+
   onDeconnexion(){
     sessionStorage.removeItem(AUTH_TEKEN_KEY);
     sessionStorage.removeItem(AUTH_USER_TYPE);

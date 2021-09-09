@@ -32,7 +32,7 @@ export class RestPasswordComponent implements OnInit {
       console.log(res);
 
       if(res==-1){
-        this.router.navigate(['/login'])
+        this.router.navigate(['/rest'])
         console.log('X-1X');
       }else if(res==1){
         sessionStorage.setItem(AUTH_USER_TYPE,"CU");

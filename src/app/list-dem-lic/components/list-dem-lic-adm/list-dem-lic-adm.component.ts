@@ -3,20 +3,20 @@ import { Component, OnInit } from '@angular/core';
 import {FormGroup} from '@angular/forms'
 import { Router } from '@angular/router';
 import { ApiService } from 'src/app/shared/api.service';
-import { DemAprvSOf } from 'src/app/shared/models/DemAprvSof.model';
+import { DemAprvLic } from 'src/app/shared/models/DemAprvLic.nodel';
 import { AUTH_TEKEN_KEY, AUTH_USER_FIRST_NAME, AUTH_USER_LAST_NAME, AUTH_USER_TYPE } from 'src/app/state/CurrentUser';
 
 @Component({
-  selector: 'app-list-dem-sof-user',
-  templateUrl: './list-dem-sof-user.component.html',
-  styleUrls: ['./list-dem-sof-user.component.css']
+  selector: 'app-list-dem-lic-adm',
+  templateUrl: './list-dem-lic-adm.component.html',
+  styleUrls: ['./list-dem-lic-adm.component.css']
 })
 
-export class ListDemSofUserComponent implements OnInit{
+export class ListDemLicAdmComponent implements OnInit{
 
   formValue ! : FormGroup;
-  DemAprSofObj : DemAprvSOf = new DemAprvSOf();
-  DemAprSofData ! : DemAprvSOf[];
+  DemAprvLicObj : DemAprvLic = new DemAprvLic();
+  DemAprLicData ! : DemAprvLic[];
   showAdd ! : boolean;
   showUpdate ! : boolean;
   p: number = 1;
@@ -43,14 +43,38 @@ export class ListDemSofUserComponent implements OnInit{
 
   
   getAllDemandes() {
-    this.api.listeDemAprv()
+    this.api.listeDemAprvLic()
     .subscribe(res=>{
-      this.DemAprSofData = res;
+      this.DemAprLicData = res;
       console.log(res)
     },(error :HttpErrorResponse)=>{
       alert(error.message);
     })
   }
+
+
+  onAccept(row: any){
+    this.api.AprDemLic(row.id_Approv)
+    .subscribe(res => {
+      alert("Demmad Approved succefully");
+      this.getAllDemandes();
+    }, err=> {
+      alert("Something went wrong");
+    })
+
+  }
+
+  onRefuse(row: any){
+    this.api.RefDemLic(row.id_Approv)
+    .subscribe(res => {
+      alert("Demmad Refused succefully");
+      this.getAllDemandes();
+    }, err=> {
+      alert("Something went wrong");
+    })
+
+  }
+
 
   onDeconnexion(){
     sessionStorage.removeItem(AUTH_TEKEN_KEY);
@@ -62,5 +86,6 @@ export class ListDemSofUserComponent implements OnInit{
 
 
 }
+
 
 

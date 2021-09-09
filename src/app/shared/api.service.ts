@@ -5,6 +5,7 @@ import { User } from './models/User.model';
 import { Software } from './models/Software.model';
 import { Licence } from './models/Licence.model';
 import { DemAprvSOf } from './models/DemAprvSof.model';
+import { DemAprvLic } from './models/DemAprvLic.nodel';
 
 @Injectable({
   providedIn: 'root'
@@ -93,8 +94,8 @@ export class ApiService {
     return this.http.get<void>('http://localhost:8080/AprLic/Ajouter?id_software='+id_software+'&id_user='+id_user);
   }
   
-  public listeDemAprvLic():Observable<DemAprvSOf[]>{
-    return this.http.get<DemAprvSOf[]>('http://localhost:8080/AprLic/listeDemAprv');
+  public listeDemAprvLic():Observable<DemAprvLic[]>{
+    return this.http.get<DemAprvLic[]>('http://localhost:8080/AprLic/listeDemAprv');
   }
   public AprDemLic(DemandeId: number):Observable<void>{
     return this.http.get<void>('http://localhost:8080/AprLic/accepter/'+DemandeId);

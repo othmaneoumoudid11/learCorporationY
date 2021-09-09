@@ -44,7 +44,7 @@ export class RegisterComponent implements OnInit {
    this.api.addUser(this.UserObj)
     .subscribe(res=>{
       console.log(res);
-      this.router.navigate(['/login'])
+      this.router.navigate(['/'])
     },
     err=>{
       alert("something Went Wrong")

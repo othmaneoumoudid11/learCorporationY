@@ -6,6 +6,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { AuthModule } from './auth/auth.module';
 import { LicenceModule } from './licence/licence.module';
+import { ListDemLicModule } from './list-dem-lic/list-dem-lic.module';
 import { ListDemSofModule } from './list-dem-sof/list-dem-sof.module';
 import { SoftwareModule } from './software/software.module';
 
@@ -21,7 +22,8 @@ import { SoftwareModule } from './software/software.module';
     ReactiveFormsModule,
     SoftwareModule,
     LicenceModule,
-    ListDemSofModule
+    ListDemSofModule,
+    ListDemLicModule
   ],
   providers: [],
   bootstrap: [AppComponent]
