@@ -9,6 +9,7 @@ import { LicenceModule } from './licence/licence.module';
 import { ListDemLicModule } from './list-dem-lic/list-dem-lic.module';
 import { ListDemSofModule } from './list-dem-sof/list-dem-sof.module';
 import { SoftwareModule } from './software/software.module';
+import { UsersModule } from './users/users.module';
 
 @NgModule({
   declarations: [
@@ -23,7 +24,8 @@ import { SoftwareModule } from './software/software.module';
     SoftwareModule,
     LicenceModule,
     ListDemSofModule,
-    ListDemLicModule
+    ListDemLicModule,
+    UsersModule
   ],
   providers: [],
   bootstrap: [AppComponent]
