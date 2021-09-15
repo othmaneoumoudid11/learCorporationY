@@ -81,7 +81,7 @@ export class ListDemLicAdmComponent implements OnInit{
     sessionStorage.removeItem(AUTH_USER_TYPE);
     sessionStorage.removeItem(AUTH_USER_LAST_NAME);
     sessionStorage.removeItem(AUTH_USER_FIRST_NAME);
-    this.router.navigateByUrl("/login");
+    this.router.navigateByUrl("/");
   }
 
 

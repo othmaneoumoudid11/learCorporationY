@@ -22,6 +22,10 @@ export class ApiService {
     return this.http.post<User>('http://localhost:8080/comptes/ajouterCU', user);
   }
 
+  public addAdm(user: User): Observable<User> {
+    return this.http.post<User>('http://localhost:8080/comptes/ajouterCM', user);
+  }
+
   
   public updateUser(user: User): Observable<User> {
     return this.http.put<User>('http://localhost:8080/comptes/modifierCC', user);

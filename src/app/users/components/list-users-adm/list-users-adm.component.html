@@ -1,63 +1,91 @@
+<nav class="navbar navbar-expand-lg navbar-light bg-light mb-5">
+    <div class="container-fluid">
+      <a class="navbar-brand">List Utilisateurs</a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+          <li class="nav-item">
+            <a class="nav-link active" aria-current="page">{{firstName}}</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link">{{lastName}}</a>
+          </li>
+        </ul>
 
-
-<div class="container  cont">
-    <form class="content" [formGroup]="registerForm" (ngSubmit)="submitData()">
-        <h3> Register Form </h3>
-        <div class="row">
-            <div class="mt-2 mb-2 col-lg-6 col-6">
-                <input type="text" formControlName="firstName" class="form-control" placeholder="first Name">
-                
-                <div *ngIf="firstname.invalid && (firstname.touched || firstname.dirty)">
-                   <span class="error" *ngIf="firstname.errors?.required">*First Name Required</span>   
-                   <span class="error" *ngIf="firstname.errors?.pattern">*Only Characters</span>   
-                </div>
-
-            </div>
-            <div class="mt-2 mb-2 col-lg-6 col-6">
-                <input type="text" formControlName="lastName" class="form-control" placeholder="last Name">
-
-                <div *ngIf="lastname.invalid && (lastname.touched || lastname.dirty)">
-                    <span class="error" *ngIf="lastname.errors?.required">*Last Name Required</span>   
-                    <span class="error" *ngIf="lastname.errors?.pattern">*Only Characters</span>   
-                </div>
-
-            </div>
-        </div>
-        <div class="mt-2 mb-2 col-lg-12 col-12">
-            <input type="text" formControlName="emailId" class="form-control" placeholder="Emaill">
-            
-            <div *ngIf="emailid.invalid && (emailid.touched || emailid.dirty)">
-                <span class="error" *ngIf="emailid.errors?.required">*Email Required</span>   
-                <span class="error" *ngIf="emailid.errors?.email">*Entre Valid Email</span>   
-            </div>
+        
+        <div class="marR" *ngIf="typeCompte=='CM'">
+            <button type="button" class="btn btn-secondary" routerLink="/UsersAdm">Users</button>
         </div>
 
-        <div class="mt-2 mb-2 col-lg-12 col-12">
-            <input type="password" formControlName="Password" class="form-control" placeholder="password">
-
-            <div *ngIf="password.invalid && (password.touched || password.dirty)">
-                <span class="error" *ngIf="password.errors?.required">*Password Required</span>   
-            </div>
-
+        <div class="marR">
+            <button type="button" class="btn btn-outline-secondary" routerLink="/softwares">Softwares</button>
+        </div>
+  
+        <div class="marR">
+            <button type="button" class="btn btn-outline-secondary" routerLink="/licences">Licences</button>
         </div>
 
-        <div class="mt-2 mb-2 col-lg-12 col-12">
-            <input type="text" formControlName="mobileNumber" class="form-control" placeholder="Mobile">
-            <div *ngIf="mobilenumber.invalid && (mobilenumber.touched || mobilenumber.dirty)">
-                <span class="error" *ngIf="mobilenumber.errors?.required">*Mobile Number Required</span>   
-                <span class="error" *ngIf="mobilenumber.errors?.pattern">*Only Numbers</span>   
-            </div>
+        <div class="marR" *ngIf="typeCompte=='CM'">
+            <button routerLink="/RegAdm" class="btn btn-success" >Add Admin</button>
+          </div>
+  
+        <div class="dropdown d-flex">
+          
+          <a class="btn btn-secondary dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false">
+            Dropdown link
+          </a>
+        
+          <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+            <li *ngIf="typeCompte=='CM'"><a class="dropdown-item" routerLink="/LDLAA">Licences Requests</a></li>
+            <li *ngIf="typeCompte=='CM'"><a class="dropdown-item" routerLink="/LDSAA">Softwares Requests</a></li>
+            <li *ngIf="typeCompte=='CU'"><a class="dropdown-item" routerLink="/LDLAU">Licences Requests</a></li>
+            <li *ngIf="typeCompte=='CU'"><a class="dropdown-item" routerLink="/LDSAU">Softwares Requests</a></li>
+            <li><a class="dropdown-item" (click)="onDeconnexion()">Log-Out</a></li>
+          </ul>
         </div>
-        <div class="mt-4 mb-4 d-grid gap-2">
-            <button  type="submit" class="btn btn-dark" [disabled]="registerForm.invalid">Submit</button>
-        </div>
+      </div>
+    </div>
+  </nav>
+  
 
-        <div>
-            <p>Have you an acount ?</p>
-        </div>
-        <div class="d-grid gap-2">
-        <button type="button" class="btn btn-outline-dark" routerLink="/">Login</button>
-        </div>
 
+<div class="container  content cont">
+ 
+    <form>
+        <div class="mb-3 form-group">
+          <label for="exampleInputEmail1">Search Term</label>
+          <input type="text" [(ngModel)]="term" name="term" class="form-control">
+        </div>
     </form>
+    <table class="table">
+        <thead>
+          <tr>
+            <th scope="col">id_compte</th>
+            <th scope="col">First_name</th>
+            <th scope="col">Last_name</th>
+            <th scope="col">email</th>
+            <th scope="col">motpasse</th>
+            <th scope="col">Num_telephone</th>
+            <th *ngIf="typeCompte=='CM'">Action</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let row of UsersData | paginate: { itemsPerPage: 6, currentPage: p} | filter : term">
+            <td>{{row.id_compte}}</td>
+            <td>{{row.First_name}}</td>
+            <td>{{row.Last_name}}</td>
+            <td>{{row.email}}</td>
+            <td>{{row.motpasse}}</td>
+            <td>{{row.num_telephone}}</td>
+            <td *ngIf="typeCompte=='CM'">
+                <button (click)="DeleteUser(row)" style="color :rgb(207, 28, 22)" class="btn btn-danger mx-3">Delete</button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+      <div class="cent"> 
+          <pagination-controls (pageChange)="p = $event"></pagination-controls>
+      </div>
 </div>
