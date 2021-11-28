@@ -17,8 +17,12 @@
   
         </ul>
 
+        <div class="marR" *ngIf="typeCompte=='CM'">
+          <button type="button" class="btn btn-outline-secondary" routerLink="/UsersAdm">Users</button>
+      </div>
+
         <div class="marR">
-            <button type="button" class="btn btn-secondary" routerLink="/softwares">Softwares</button>
+            <button type="button" class="btn btn-outline-secondary" routerLink="/softwares">Softwares</button>
         </div>
   
         <div class="marR">
@@ -75,7 +79,7 @@
             <td>{{row.user.last_name}}</td>
             <td *ngIf="typeCompte=='CM'">
                 <button (click)="onAccept(row)" style="color: rgb(212, 218, 211)"  class="btn btn-info">Accept</button>
-                <button (click)="onRefuse(row)" style="color :rgb(207, 28, 22)" class="btn btn-danger mx-3">Refuse</button>
+                <button (click)="onRefuse(row)" style="color :rgb(7, 6, 6)" class="btn btn-danger mx-3">Refuse</button>
             </td>
           </tr>
         </tbody>

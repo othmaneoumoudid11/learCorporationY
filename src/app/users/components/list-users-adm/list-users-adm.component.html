@@ -29,8 +29,8 @@
 
         <div class="marR" *ngIf="typeCompte=='CM'">
             <button routerLink="/RegAdm" class="btn btn-success" >Add Admin</button>
-          </div>
-  
+        </div>
+        
         <div class="dropdown d-flex">
           
           <a class="btn btn-secondary dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false">
@@ -74,13 +74,13 @@
         <tbody>
           <tr *ngFor="let row of UsersData | paginate: { itemsPerPage: 6, currentPage: p} | filter : term">
             <td>{{row.id_compte}}</td>
-            <td>{{row.First_name}}</td>
-            <td>{{row.Last_name}}</td>
+            <td>{{row.first_name}}</td>
+            <td>{{row.last_name}}</td>
             <td>{{row.email}}</td>
             <td>{{row.motpasse}}</td>
             <td>{{row.num_telephone}}</td>
             <td *ngIf="typeCompte=='CM'">
-                <button (click)="DeleteUser(row)" style="color :rgb(207, 28, 22)" class="btn btn-danger mx-3">Delete</button>
+                <button (click)="DeleteUser(row)" style="color :rgb(8, 8, 8)" class="btn btn-danger mx-3">Delete</button>
             </td>
           </tr>
         </tbody>

@@ -43,7 +43,7 @@ export class RegisterAdmComponent implements OnInit {
 
    console.log(this.UserObj)
 
-   this.api.addUser(this.UserObj)
+   this.api.addAdm(this.UserObj)
     .subscribe(res=>{
       this.userData = res;
       console.log(res);

@@ -17,6 +17,10 @@
   
         </ul>
 
+        <div class="marR" *ngIf="typeCompte=='CM'">
+            <button type="button" class="btn btn-outline-secondary" routerLink="/UsersAdm">Users</button>
+        </div>
+
         <div class="marR">
             <button type="button" class="btn btn-secondary" routerLink="/softwares">Softwares</button>
         </div>
@@ -59,12 +63,12 @@
     <table class="table">
         <thead>
           <tr>
-            <th scope="col">#</th>
-            <th scope="col">First</th>
-            <th scope="col">Last</th>
-            <th scope="col">Handle</th>
-            <th scope="col">Last</th>
-            <th scope="col">Handle</th>
+            <th scope="col">Refernce</th>
+            <th scope="col">Manifacture</th>
+            <th scope="col">Supplier</th>
+            <th scope="col">Familly</th>
+            <th scope="col">Version</th>
+            <th scope="col">Description</th>
             <th>Action</th>
           </tr>
         </thead>

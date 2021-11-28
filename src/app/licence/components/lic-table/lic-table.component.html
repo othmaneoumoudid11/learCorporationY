@@ -7,13 +7,17 @@
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
       <ul class="navbar-nav me-auto mb-2 mb-lg-0">
         <li class="nav-item">
-          <a class="nav-link active" aria-current="page">Lear</a>
+          <a class="nav-link active" aria-current="page">{{FirstName}}</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link">Corporation</a>
+          <a class="nav-link">{{LastName}}</a>
         </li>
 
       </ul>
+
+      <div class="marR" *ngIf="typeCompte=='CM'">
+        <button type="button" class="btn btn-outline-secondary" routerLink="/UsersAdm">Users</button>
+    </div>
 
       <div class="marR">
           <button type="button" class="btn btn-outline-secondary" routerLink="/softwares">Softwares</button>
@@ -55,13 +59,13 @@
     <table class="table">
         <thead>
           <tr>
-            <th scope="col">#</th>
-            <th scope="col">First</th>
-            <th scope="col">Last</th>
-            <th scope="col">Handle</th>
-            <th scope="col">Last</th>
-            <th scope="col">Handle</th>
-            <th scope="col">Handle</th>
+            <th scope="col">Refernce</th>
+            <th scope="col">Serial</th>
+            <th scope="col"> Type</th>
+            <th scope="col"> Cost</th>
+            <th scope="col"> currency</th>
+            <th scope="col"> BO alloc</th>
+            <th scope="col"> Seller Contract Ref</th>
             <th>Action</th>
           </tr>
         </thead>
